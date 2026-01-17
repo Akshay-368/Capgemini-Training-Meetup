@@ -2,7 +2,7 @@
 // Console.WriteLine("Hello, World!");
 using System;
 using Task;
-// Created using dotnet console -n Playground
+// Created using dotnet new console -n Playground
 class Program
 {
     static void Main()
