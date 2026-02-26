@@ -1,0 +1,21 @@
+public class Maths{
+   public virtual int Add( int a , int b ) ;
+}
+public class ChildMaths : Maths{
+   public override int Add( int a , int b ) {
+       while ( b != 0 ) {
+         int XorResult = a ^ b ;
+         int Carry = ( a & b ) << 1 ;
+         a = XorResult ;
+         b = Carry ;
+       }
+     return a ;
+   }
+}
+
+// Other than that they asked about doing sql queries :
+// Like finding students whose marks are greater than 50 from the table Student and Marks .
+// ANother was to find the name of the students whose name are not present in the Marks table .
+
+// Other than that he asked about the terms of OOPS , SOLID and other such coding principles.
+// And if anyone of us has any experience with the agentic ai and terms or any project .
