@@ -2,9 +2,9 @@ name: SonarCloud Analysis
 
 on:
 push:
-branches: [ "quantity-measurement-project" ]
+branches: ["quantity-measurement-project"]
 pull_request:
-branches: [ "quantity-measurement-project" ]
+branches: ["quantity-measurement-project"]
 
 jobs:
 build:
@@ -12,7 +12,6 @@ runs-on: windows-latest
 
 ```
 steps:
-
   - name: Checkout repository
     uses: actions/checkout@v4
     with:
