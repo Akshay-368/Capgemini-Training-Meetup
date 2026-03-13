@@ -1,0 +1,562 @@
+hey so i have like two different codebase design for the same project . and i was wondering the difference between these two is what as how these two feels like alien. And i am not sure how much each differ , like is one usng n-tier or what ,comapred to other's of clean arcitecture , vertical slice architecture , cqrs ,etc.And also i am gonna need your help later , so first go through them carefully though. 
+First codebase :
+📁 QuantityMeasurementApp/
+├── 📄 .gitignore
+├── 📁 QuantityMeasurementSolution
+│   ├── 📁 BusinessLayer
+│   │   ├── 📄 BusinessLayer.csproj
+│   │   ├── 📁 Interface
+│   │   │   └── 📄 IQuantityMeasurementService.cs
+│   │   └── 📁 Services
+│   │       └── 📄 QuantityMeasurementService.cs
+│   ├── 📁 ModelLayer
+│   │   ├── 📁 DTOs
+│   │   │   └── 📄 QuantityDto.cs
+│   │   ├── 📁 Entities
+│   │   │   └── 📄 QuantityMeasurementEntity.cs
+│   │   ├── 📄 ModelLayer.csproj
+│   │   └── 📁 Models
+│   │       └── 📄 QuantityModel.cs
+│   ├── 📁 QuantityMeasurement.Api
+│   │   ├── 📄 appsettings.Development.json
+│   │   ├── 📄 appsettings.json
+│   │   ├── 📁 Contracts
+│   │   │   ├── 📄 ApiResponse.cs
+│   │   │   ├── 📄 ArithmeticRequest.cs
+│   │   │   ├── 📄 CompareRequest.cs
+│   │   │   ├── 📄 ConvertRequest.cs
+│   │   │   └── 📄 QuantityRequest.cs
+│   │   ├── 📁 Controllers
+│   │   │   └── 📄 QuantityMeasurementController.cs
+│   │   ├── 📄 Program.cs
+│   │   ├── 📁 Properties
+│   │   │   └── 📄 launchSettings.json
+│   │   ├── 📄 QuantityMeasurement.Api.csproj
+│   │   └── 📄 QuantityMeasurement.Api.http
+│   ├── 📁 QuantityMeasurement.Domain
+│   │   ├── 📁 Controllers
+│   │   │   └── 📄 QuantityMeasurementController.cs
+│   │   ├── 📁 DTOs
+│   │   │   └── 📄 QuantityDto.cs
+│   │   ├── 📁 Entities
+│   │   │   └── 📄 QuantityMeasurementEntity.cs
+│   │   ├── 📁 Enums
+│   │   │   ├── 📄 LengthUnit.cs
+│   │   │   ├── 📄 TemperatureUnit.cs
+│   │   │   ├── 📄 VolumeUnit.cs
+│   │   │   └── 📄 WeightUnit.cs
+│   │   ├── 📁 Exceptions
+│   │   │   └── 📄 QuantityMeasurementException.cs
+│   │   ├── 📁 Interfaces
+│   │   │   ├── 📄 IMeasureable.cs
+│   │   │   ├── 📄 IQuantityMeasurementRepository.cs
+│   │   │   └── 📄 IQuantityMeasurementService.cs
+│   │   ├── 📁 Models
+│   │   │   └── 📄 QuantityModel.cs
+│   │   ├── 📁 obj
+│   │   │   ├── 📁 Debug
+│   │   │   │   └── 📁 net10.0
+│   │   │   │       ├── 📄 .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+│   │   │   │       ├── 📄 QuantityMeasurement.Domain.assets.cache
+│   │   │   │       ├── 📄 QuantityMeasurement.Domain.csproj.FileListAbsolute.txt
+│   │   │   │       └── 📄 QuantityMeasurement.Domain.GlobalUsings.g.cs
+│   │   │   ├── 📄 project.assets.json
+│   │   │   ├── 📄 project.nuget.cache
+│   │   │   ├── 📄 QuantityMeasurement.Domain.csproj.nuget.dgspec.json
+│   │   │   ├── 📄 QuantityMeasurement.Domain.csproj.nuget.g.props
+│   │   │   └── 📄 QuantityMeasurement.Domain.csproj.nuget.g.targets
+│   │   ├── 📄 QuantityMeasurement.Domain.csproj
+│   │   ├── 📁 Repositories
+│   │   │   └── 📄 QuantityMeasurementCacheRepository.cs
+│   │   ├── 📁 Services
+│   │   │   ├── 📄 QuantityMeasurementService.cs
+│   │   │   └── 📄 UnitConversionService.cs
+│   │   └── 📁 ValueObjects
+│   │       └── 📄 Quantity.cs
+│   ├── 📁 QuantityMeasurement.Infrastructure
+│   │   ├── 📁 obj
+│   │   │   ├── 📁 Debug
+│   │   │   │   └── 📁 net10.0
+│   │   │   │       ├── 📄 .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+│   │   │   │       ├── 📄 QuantityMeasurement.Infrastructure.assets.cache
+│   │   │   │       ├── 📄 QuantityMeasurement.Infrastructure.csproj.FileListAbsolute.txt
+│   │   │   │       └── 📄 QuantityMeasurement.Infrastructure.GlobalUsings.g.cs
+│   │   │   ├── 📄 project.assets.json
+│   │   │   ├── 📄 project.nuget.cache
+│   │   │   ├── 📄 QuantityMeasurement.Infrastructure.csproj.nuget.dgspec.json
+│   │   │   ├── 📄 QuantityMeasurement.Infrastructure.csproj.nuget.g.props
+│   │   │   └── 📄 QuantityMeasurement.Infrastructure.csproj.nuget.g.targets
+│   │   └── 📄 QuantityMeasurement.Infrastructure.csproj
+│   ├── 📁 QuantityMeasurement.Tests
+│   │   ├── 📁 obj
+│   │   │   ├── 📁 Debug
+│   │   │   │   └── 📁 net10.0
+│   │   │   │       ├── 📄 .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+│   │   │   │       ├── 📄 QuantityMeasurement.Tests.assets.cache
+│   │   │   │       ├── 📄 QuantityMeasurement.Tests.csproj.FileListAbsolute.txt
+│   │   │   │       └── 📄 QuantityMeasurement.Tests.GlobalUsings.g.cs
+│   │   │   ├── 📄 project.assets.json
+│   │   │   ├── 📄 project.nuget.cache
+│   │   │   ├── 📄 QuantityMeasurement.Tests.csproj.nuget.dgspec.json
+│   │   │   ├── 📄 QuantityMeasurement.Tests.csproj.nuget.g.props
+│   │   │   └── 📄 QuantityMeasurement.Tests.csproj.nuget.g.targets
+│   │   ├── 📄 QuantityAdvancedOperationsTests.cs
+│   │   ├── 📄 QuantityGenericTests.cs
+│   │   ├── 📄 QuantityMeasurement.Tests.csproj
+│   │   ├── 📄 QuantityMeasurementServiceTests.cs
+│   │   └── 📄 QuantityUc12Tests.cs
+│   ├── 📁 QuantityMeasurementApp
+│   │   ├── 📁 obj
+│   │   │   ├── 📁 Debug
+│   │   │   │   └── 📁 net10.0
+│   │   │   │       ├── 📄 .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+│   │   │   │       ├── 📄 apphost.exe
+│   │   │   │       ├── 📄 QuantityMeasurementApp.assets.cache
+│   │   │   │       ├── 📄 QuantityMeasurementApp.csproj.FileListAbsolute.txt
+│   │   │   │       └── 📄 QuantityMeasurementApp.GlobalUsings.g.cs
+│   │   │   ├── 📄 project.assets.json
+│   │   │   ├── 📄 project.nuget.cache
+│   │   │   ├── 📄 QuantityMeasurementApp.csproj.nuget.dgspec.json
+│   │   │   ├── 📄 QuantityMeasurementApp.csproj.nuget.g.props
+│   │   │   └── 📄 QuantityMeasurementApp.csproj.nuget.g.targets
+│   │   ├── 📄 Program.cs
+│   │   └── 📄 QuantityMeasurementApp.csproj
+│   ├── 📄 QuantityMeasurementSolution.slnx
+│   └── 📁 RepositoryLayer
+│       ├── 📁 Interfaces
+│       │   └── 📄 IQuantityMeasurementRepository.cs
+│       ├── 📁 Repositories
+│       │   └── 📄 QuantityMeasurementCacheRepository.cs
+│       └── 📄 RepositoryLayer.csproj
+└── 📄 README.md
+vs
+Second codebase structure:
+📁 QuantityMeasurementApp/
+├── 📁 Application
+│   ├── 📁 bin
+│   │   └── 📁 Debug
+│   │       └── 📁 net8.0
+│   │           ├── 📄 QuantityMeasurement.Application.deps.json
+│   │           ├── 📄 QuantityMeasurement.Application.dll
+│   │           ├── 📄 QuantityMeasurement.Application.pdb
+│   │           ├── 📄 QuantityMeasurement.Domain.dll
+│   │           └── 📄 QuantityMeasurement.Domain.pdb
+│   ├── 📁 DTOs
+│   │   ├── 📄 QuantityDto.cs
+│   │   └── 📄 ResultDto.cs
+│   ├── 📁 Features
+│   │   ├── 📁 Quantities
+│   │   │   ├── 📄 AddQuantitiesCommand.cs
+│   │   │   ├── 📄 AddQuantitiesHandler.cs
+│   │   │   ├── 📄 CompareQuantitiesHandler.cs
+│   │   │   ├── 📄 CompareQuantitiesQuery.cs
+│   │   │   ├── 📄 ConvertQuantityHandler.cs
+│   │   │   ├── 📄 ConvertQuantityQuery.cs
+│   │   │   ├── 📄 DivideByScalarCommand.cs
+│   │   │   ├── 📄 DivideByScalarHandler.cs
+│   │   │   ├── 📄 DivideQuantitiesHandler.cs
+│   │   │   ├── 📄 DivideQuantitiesQuery.cs
+│   │   │   ├── 📄 SubtractQuantitiesCommand.cs
+│   │   │   └── 📄 SubtractQuantitiesHandler.cs
+│   │   └── 📄 QuantityFactory.cs
+│   ├── 📁 obj
+│   │   ├── 📁 Debug
+│   │   │   └── 📁 net8.0
+│   │   │       ├── 📄 .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│   │   │       ├── 📄 Quantity.CD59B764.Up2Date
+│   │   │       ├── 📄 QuantityMeasurement.Application.AssemblyInfo.cs
+│   │   │       ├── 📄 QuantityMeasurement.Application.AssemblyInfoInputs.cache
+│   │   │       ├── 📄 QuantityMeasurement.Application.assets.cache
+│   │   │       ├── 📄 QuantityMeasurement.Application.csproj.AssemblyReference.cache
+│   │   │       ├── 📄 QuantityMeasurement.Application.csproj.CoreCompileInputs.cache
+│   │   │       ├── 📄 QuantityMeasurement.Application.csproj.FileListAbsolute.txt
+│   │   │       ├── 📄 QuantityMeasurement.Application.dll
+│   │   │       ├── 📄 QuantityMeasurement.Application.GeneratedMSBuildEditorConfig.editorconfig
+│   │   │       ├── 📄 QuantityMeasurement.Application.GlobalUsings.g.cs
+│   │   │       ├── 📄 QuantityMeasurement.Application.pdb
+│   │   │       ├── 📁 ref
+│   │   │       │   └── 📄 QuantityMeasurement.Application.dll
+│   │   │       └── 📁 refint
+│   │   │           └── 📄 QuantityMeasurement.Application.dll
+│   │   ├── 📄 project.assets.json
+│   │   ├── 📄 project.nuget.cache
+│   │   ├── 📄 QuantityMeasurement.Application.csproj.nuget.dgspec.json
+│   │   ├── 📄 QuantityMeasurement.Application.csproj.nuget.g.props
+│   │   └── 📄 QuantityMeasurement.Application.csproj.nuget.g.targets
+│   └── 📄 QuantityMeasurement.Application.csproj
+├── 📁 Domain
+│   ├── 📁 bin
+│   │   └── 📁 Debug
+│   │       └── 📁 net8.0
+│   │           ├── 📄 QuantityMeasurement.Domain.deps.json
+│   │           ├── 📄 QuantityMeasurement.Domain.dll
+│   │           └── 📄 QuantityMeasurement.Domain.pdb
+│   ├── 📁 Core
+│   │   ├── 📄 IQuantity.cs
+│   │   ├── 📄 QuantityAbstractBaseClass.cs
+│   │   └── 📄 Unit.cs
+│   ├── 📁 obj
+│   │   ├── 📁 Debug
+│   │   │   └── 📁 net8.0
+│   │   │       ├── 📄 .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│   │   │       ├── 📄 QuantityMeasurement.Domain.AssemblyInfo.cs
+│   │   │       ├── 📄 QuantityMeasurement.Domain.AssemblyInfoInputs.cache
+│   │   │       ├── 📄 QuantityMeasurement.Domain.assets.cache
+│   │   │       ├── 📄 QuantityMeasurement.Domain.csproj.CoreCompileInputs.cache
+│   │   │       ├── 📄 QuantityMeasurement.Domain.csproj.FileListAbsolute.txt
+│   │   │       ├── 📄 QuantityMeasurement.Domain.dll
+│   │   │       ├── 📄 QuantityMeasurement.Domain.GeneratedMSBuildEditorConfig.editorconfig
+│   │   │       ├── 📄 QuantityMeasurement.Domain.GlobalUsings.g.cs
+│   │   │       ├── 📄 QuantityMeasurement.Domain.pdb
+│   │   │       ├── 📁 ref
+│   │   │       │   └── 📄 QuantityMeasurement.Domain.dll
+│   │   │       └── 📁 refint
+│   │   │           └── 📄 QuantityMeasurement.Domain.dll
+│   │   ├── 📄 project.assets.json
+│   │   ├── 📄 project.nuget.cache
+│   │   ├── 📄 QuantityMeasurement.Domain.csproj.nuget.dgspec.json
+│   │   ├── 📄 QuantityMeasurement.Domain.csproj.nuget.g.props
+│   │   └── 📄 QuantityMeasurement.Domain.csproj.nuget.g.targets
+│   ├── 📄 QuantityMeasurement.Domain.csproj
+│   └── 📁 Units
+│       ├── 📁 Length
+│       │   ├── 📄 Centimeter.cs
+│       │   ├── 📄 Feet.cs
+│       │   ├── 📄 Inches.cs
+│       │   ├── 📄 Meter.cs
+│       │   └── 📄 Yard.cs
+│       ├── 📄 LengthAbstractSubBaseClass.cs
+│       ├── 📁 Temperature
+│       │   ├── 📄 Celsius.cs
+│       │   ├── 📄 Fahrenheit.cs
+│       │   └── 📄 Kelvin.cs
+│       ├── 📄 TemperatureAbstractSubBaseClass.cs
+│       ├── 📁 Volume
+│       │   ├── 📄 Gallon.cs
+│       │   ├── 📄 Litre.cs
+│       │   └── 📄 Millilitre.cs
+│       ├── 📄 VolumeAbstractSubBaseClass.cs
+│       ├── 📁 Weight
+│       │   ├── 📄 Gram.cs
+│       │   ├── 📄 Kilogram.cs
+│       │   └── 📄 Pound.cs
+│       └── 📄 WeightAbstractSubBaseClass.cs
+├── 📁 Infrastructure
+│   ├── 📁 bin
+│   │   └── 📁 Debug
+│   │       └── 📁 net8.0
+│   │           ├── 📄 QuantityMeasurement.Application.dll
+│   │           ├── 📄 QuantityMeasurement.Application.pdb
+│   │           ├── 📄 QuantityMeasurement.Domain.dll
+│   │           ├── 📄 QuantityMeasurement.Domain.pdb
+│   │           ├── 📄 QuantityMeasurement.Infrastructure.deps.json
+│   │           ├── 📄 QuantityMeasurement.Infrastructure.dll
+│   │           ├── 📄 QuantityMeasurement.Infrastructure.pdb
+│   │           └── 📄 QuantityMeasurement.Infrastructure.runtimeconfig.json
+│   ├── 📄 Class1.cs
+│   ├── 📁 obj
+│   │   ├── 📁 Debug
+│   │   │   └── 📁 net8.0
+│   │   │       ├── 📄 .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│   │   │       ├── 📄 Quantity.AF3DD6D2.Up2Date
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.AssemblyInfo.cs
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.AssemblyInfoInputs.cache
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.assets.cache
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.csproj.AssemblyReference.cache
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.csproj.CoreCompileInputs.cache
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.csproj.FileListAbsolute.txt
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.dll
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.genruntimeconfig.cache
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.GlobalUsings.g.cs
+│   │   │       ├── 📄 QuantityMeasurement.Infrastructure.pdb
+│   │   │       ├── 📁 ref
+│   │   │       │   └── 📄 QuantityMeasurement.Infrastructure.dll
+│   │   │       └── 📁 refint
+│   │   │           └── 📄 QuantityMeasurement.Infrastructure.dll
+│   │   ├── 📄 project.assets.json
+│   │   ├── 📄 project.nuget.cache
+│   │   ├── 📄 QuantityMeasurement.Infrastructure.csproj.nuget.dgspec.json
+│   │   ├── 📄 QuantityMeasurement.Infrastructure.csproj.nuget.g.props
+│   │   └── 📄 QuantityMeasurement.Infrastructure.csproj.nuget.g.targets
+│   └── 📄 QuantityMeasurement.Infrastructure.csproj
+├── 📁 QuantityMeasurement.Tests
+│   ├── 📁 bin
+│   │   └── 📁 Debug
+│   │       └── 📁 net8.0
+│   │           ├── 📄 CoverletSourceRootsMapping_QuantityMeasurement.Tests
+│   │           ├── 📁 cs
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📁 de
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📁 es
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📁 fr
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📁 it
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📁 ja
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📁 ko
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.dll
+│   │           ├── 📄 Microsoft.TestPlatform.CoreUtilities.dll
+│   │           ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.dll
+│   │           ├── 📄 Microsoft.TestPlatform.PlatformAbstractions.dll
+│   │           ├── 📄 Microsoft.TestPlatform.Utilities.dll
+│   │           ├── 📄 Microsoft.VisualStudio.CodeCoverage.Shim.dll
+│   │           ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.dll
+│   │           ├── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+│   │           ├── 📄 Newtonsoft.Json.dll
+│   │           ├── 📄 NuGet.Frameworks.dll
+│   │           ├── 📄 nunit.engine.api.dll
+│   │           ├── 📄 nunit.engine.core.dll
+│   │           ├── 📄 nunit.engine.dll
+│   │           ├── 📄 nunit.framework.dll
+│   │           ├── 📄 NUnit3.TestAdapter.dll
+│   │           ├── 📄 NUnit3.TestAdapter.pdb
+│   │           ├── 📄 nunit_random_seed.tmp
+│   │           ├── 📁 pl
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📁 pt-BR
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📄 QuantityMeasurement.Domain.dll
+│   │           ├── 📄 QuantityMeasurement.Domain.pdb
+│   │           ├── 📄 QuantityMeasurement.Tests.deps.json
+│   │           ├── 📄 QuantityMeasurement.Tests.dll
+│   │           ├── 📄 QuantityMeasurement.Tests.pdb
+│   │           ├── 📄 QuantityMeasurement.Tests.runtimeconfig.json
+│   │           ├── 📁 ru
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📄 testcentric.engine.metadata.dll
+│   │           ├── 📄 testhost.dll
+│   │           ├── 📄 testhost.exe
+│   │           ├── 📁 tr
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           ├── 📁 zh-Hans
+│   │           │   ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │           │   ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │           │   ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │           │   └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   │           └── 📁 zh-Hant
+│   │               ├── 📄 Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+│   │               ├── 📄 Microsoft.TestPlatform.CoreUtilities.resources.dll
+│   │               ├── 📄 Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+│   │               ├── 📄 Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+│   │               └── 📄 Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+│   ├── 📁 obj
+│   │   ├── 📁 Debug
+│   │   │   └── 📁 net8.0
+│   │   │       ├── 📄 .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│   │   │       ├── 📄 Quantity.8D82B56A.Up2Date
+│   │   │       ├── 📄 QuantityMeasurement.Tests.AssemblyInfo.cs
+│   │   │       ├── 📄 QuantityMeasurement.Tests.AssemblyInfoInputs.cache
+│   │   │       ├── 📄 QuantityMeasurement.Tests.assets.cache
+│   │   │       ├── 📄 QuantityMeasurement.Tests.csproj.AssemblyReference.cache
+│   │   │       ├── 📄 QuantityMeasurement.Tests.csproj.CoreCompileInputs.cache
+│   │   │       ├── 📄 QuantityMeasurement.Tests.csproj.FileListAbsolute.txt
+│   │   │       ├── 📄 QuantityMeasurement.Tests.dll
+│   │   │       ├── 📄 QuantityMeasurement.Tests.GeneratedMSBuildEditorConfig.editorconfig
+│   │   │       ├── 📄 QuantityMeasurement.Tests.genruntimeconfig.cache
+│   │   │       ├── 📄 QuantityMeasurement.Tests.GlobalUsings.g.cs
+│   │   │       ├── 📄 QuantityMeasurement.Tests.pdb
+│   │   │       ├── 📁 ref
+│   │   │       │   └── 📄 QuantityMeasurement.Tests.dll
+│   │   │       └── 📁 refint
+│   │   │           └── 📄 QuantityMeasurement.Tests.dll
+│   │   ├── 📄 project.assets.json
+│   │   ├── 📄 project.nuget.cache
+│   │   ├── 📄 QuantityMeasurement.Tests.csproj.nuget.dgspec.json
+│   │   ├── 📄 QuantityMeasurement.Tests.csproj.nuget.g.props
+│   │   └── 📄 QuantityMeasurement.Tests.csproj.nuget.g.targets
+│   ├── 📄 QuantityMeasurement.Tests.csproj
+│   ├── 📄 UnitTestCentimeterAndYardUC-4.cs
+│   ├── 📄 UnitTestConverionUC-5.cs
+│   ├── 📄 UnitTestFeetUC-1.cs
+│   ├── 📄 UnitTestInchesUC-2.cs
+│   ├── 📄 UnitTestLengthEqualityUC-3.cs
+│   ├── 📄 UnitTestSubDivUC-12.cs
+│   ├── 📄 UnitTestTemperatureUC-14.cs
+│   ├── 📄 UnitTestUC-6.cs
+│   ├── 📄 UnitTestUC-7.cs
+│   ├── 📄 UnitTestUC-8.cs
+│   ├── 📄 UnitTestUC-9.cs
+│   └── 📄 UnitTestVolumeUC-11.cs
+├── 📄 QuantityMeasurementApp.sln
+├── 📄 ReadMe.md
+└── 📁 Web
+    ├── 📄 appsettings.Development.json
+    ├── 📄 appsettings.json
+    ├── 📁 bin
+    │   └── 📁 Debug
+    │       └── 📁 net8.0
+    │           ├── 📄 appsettings.Development.json
+    │           ├── 📄 appsettings.json
+    │           ├── 📄 Azure.Core.dll
+    │           ├── 📄 Azure.Identity.dll
+    │           ├── 📄 MediatR.Contracts.dll
+    │           ├── 📄 MediatR.dll
+    │           ├── 📄 MediatR.Extensions.Microsoft.DependencyInjection.dll
+    │           ├── 📄 Microsoft.AspNetCore.OpenApi.dll
+    │           ├── 📄 Microsoft.Bcl.AsyncInterfaces.dll
+    │           ├── 📄 Microsoft.Data.SqlClient.dll
+    │           ├── 📄 Microsoft.EntityFrameworkCore.Abstractions.dll
+    │           ├── 📄 Microsoft.EntityFrameworkCore.dll
+    │           ├── 📄 Microsoft.EntityFrameworkCore.Relational.dll
+    │           ├── 📄 Microsoft.EntityFrameworkCore.SqlServer.dll
+    │           ├── 📄 Microsoft.Extensions.DependencyInjection.Abstractions.dll
+    │           ├── 📄 Microsoft.Extensions.Logging.Abstractions.dll
+    │           ├── 📄 Microsoft.Identity.Client.dll
+    │           ├── 📄 Microsoft.Identity.Client.Extensions.Msal.dll
+    │           ├── 📄 Microsoft.IdentityModel.Abstractions.dll
+    │           ├── 📄 Microsoft.IdentityModel.JsonWebTokens.dll
+    │           ├── 📄 Microsoft.IdentityModel.Logging.dll
+    │           ├── 📄 Microsoft.IdentityModel.Protocols.dll
+    │           ├── 📄 Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+    │           ├── 📄 Microsoft.IdentityModel.Tokens.dll
+    │           ├── 📄 Microsoft.OpenApi.dll
+    │           ├── 📄 Microsoft.SqlServer.Server.dll
+    │           ├── 📄 Microsoft.Win32.SystemEvents.dll
+    │           ├── 📄 QuantityMeasurement.Application.dll
+    │           ├── 📄 QuantityMeasurement.Application.pdb
+    │           ├── 📄 QuantityMeasurement.Domain.dll
+    │           ├── 📄 QuantityMeasurement.Domain.pdb
+    │           ├── 📄 QuantityMeasurement.Infrastructure.dll
+    │           ├── 📄 QuantityMeasurement.Infrastructure.pdb
+    │           ├── 📄 QuantityMeasurement.Web.deps.json
+    │           ├── 📄 QuantityMeasurement.Web.dll
+    │           ├── 📄 QuantityMeasurement.Web.exe
+    │           ├── 📄 QuantityMeasurement.Web.pdb
+    │           ├── 📄 QuantityMeasurement.Web.runtimeconfig.json
+    │           ├── 📁 runtimes
+    │           │   ├── 📁 browser
+    │           │   │   └── 📁 lib
+    │           │   │       └── 📁 net8.0
+    │           │   │           └── 📄 System.Text.Encodings.Web.dll
+    │           │   ├── 📁 unix
+    │           │   │   └── 📁 lib
+    │           │   │       └── 📁 net6.0
+    │           │   │           ├── 📄 Microsoft.Data.SqlClient.dll
+    │           │   │           └── 📄 System.Drawing.Common.dll
+    │           │   ├── 📁 win
+    │           │   │   └── 📁 lib
+    │           │   │       └── 📁 net6.0
+    │           │   │           ├── 📄 Microsoft.Data.SqlClient.dll
+    │           │   │           ├── 📄 Microsoft.Win32.SystemEvents.dll
+    │           │   │           ├── 📄 System.Drawing.Common.dll
+    │           │   │           ├── 📄 System.Runtime.Caching.dll
+    │           │   │           ├── 📄 System.Security.Cryptography.ProtectedData.dll
+    │           │   │           └── 📄 System.Windows.Extensions.dll
+    │           │   ├── 📁 win-arm
+    │           │   │   └── 📁 native
+    │           │   │       └── 📄 Microsoft.Data.SqlClient.SNI.dll
+    │           │   ├── 📁 win-arm64
+    │           │   │   └── 📁 native
+    │           │   │       └── 📄 Microsoft.Data.SqlClient.SNI.dll
+    │           │   ├── 📁 win-x64
+    │           │   │   └── 📁 native
+    │           │   │       └── 📄 Microsoft.Data.SqlClient.SNI.dll
+    │           │   └── 📁 win-x86
+    │           │       └── 📁 native
+    │           │           └── 📄 Microsoft.Data.SqlClient.SNI.dll
+    │           ├── 📄 Swashbuckle.AspNetCore.Swagger.dll
+    │           ├── 📄 Swashbuckle.AspNetCore.SwaggerGen.dll
+    │           ├── 📄 Swashbuckle.AspNetCore.SwaggerUI.dll
+    │           ├── 📄 System.Configuration.ConfigurationManager.dll
+    │           ├── 📄 System.Diagnostics.DiagnosticSource.dll
+    │           ├── 📄 System.Drawing.Common.dll
+    │           ├── 📄 System.IdentityModel.Tokens.Jwt.dll
+    │           ├── 📄 System.IO.Pipelines.dll
+    │           ├── 📄 System.Memory.Data.dll
+    │           ├── 📄 System.Net.Http.Json.dll
+    │           ├── 📄 System.Runtime.Caching.dll
+    │           ├── 📄 System.Security.Cryptography.ProtectedData.dll
+    │           ├── 📄 System.Security.Permissions.dll
+    │           ├── 📄 System.Text.Encodings.Web.dll
+    │           ├── 📄 System.Text.Json.dll
+    │           └── 📄 System.Windows.Extensions.dll
+    ├── 📁 Controllers
+    │   └── 📄 QuantitiesController.cs
+    ├── 📁 obj
+    │   ├── 📁 Debug
+    │   │   └── 📁 net8.0
+    │   │       ├── 📄 .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+    │   │       ├── 📄 apphost.exe
+    │   │       ├── 📄 Quantity.CE55C5BC.Up2Date
+    │   │       ├── 📄 QuantityMeasurement.Web.AssemblyInfo.cs
+    │   │       ├── 📄 QuantityMeasurement.Web.AssemblyInfoInputs.cache
+    │   │       ├── 📄 QuantityMeasurement.Web.assets.cache
+    │   │       ├── 📄 QuantityMeasurement.Web.csproj.AssemblyReference.cache
+    │   │       ├── 📄 QuantityMeasurement.Web.csproj.CoreCompileInputs.cache
+    │   │       ├── 📄 QuantityMeasurement.Web.csproj.FileListAbsolute.txt
+    │   │       ├── 📄 QuantityMeasurement.Web.dll
+    │   │       ├── 📄 QuantityMeasurement.Web.GeneratedMSBuildEditorConfig.editorconfig
+    │   │       ├── 📄 QuantityMeasurement.Web.genruntimeconfig.cache
+    │   │       ├── 📄 QuantityMeasurement.Web.GlobalUsings.g.cs
+    │   │       ├── 📄 QuantityMeasurement.Web.MvcApplicationPartsAssemblyInfo.cache
+    │   │       ├── 📄 QuantityMeasurement.Web.MvcApplicationPartsAssemblyInfo.cs
+    │   │       ├── 📄 QuantityMeasurement.Web.pdb
+    │   │       ├── 📁 ref
+    │   │       │   └── 📄 QuantityMeasurement.Web.dll
+    │   │       ├── 📁 refint
+    │   │       │   └── 📄 QuantityMeasurement.Web.dll
+    │   │       ├── 📁 staticwebassets
+    │   │       │   ├── 📄 msbuild.build.QuantityMeasurement.Web.props
+    │   │       │   ├── 📄 msbuild.buildMultiTargeting.QuantityMeasurement.Web.props
+    │   │       │   └── 📄 msbuild.buildTransitive.QuantityMeasurement.Web.props
+    │   │       └── 📄 staticwebassets.build.json
+    │   ├── 📄 project.assets.json
+    │   ├── 📄 project.nuget.cache
+    │   ├── 📄 QuantityMeasurement.Web.csproj.nuget.dgspec.json
+    │   ├── 📄 QuantityMeasurement.Web.csproj.nuget.g.props
+    │   └── 📄 QuantityMeasurement.Web.csproj.nuget.g.targets
+    ├── 📄 Program.cs
+    ├── 📁 Properties
+    │   └── 📄 launchSettings.json
+    ├── 📄 QuantityMeasurement.Web.csproj
+    └── 📄 QuantityMeasurement.Web.http
