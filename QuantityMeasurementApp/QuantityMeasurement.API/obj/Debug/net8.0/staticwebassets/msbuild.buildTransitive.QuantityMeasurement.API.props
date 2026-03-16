@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\QuantityMeasurement.API.props" />
-</Project>

@@ -1,0 +1,247 @@
+Entity FrameWork (CRUD operation)
+ASP.Net basic 
+ 
+ 
+ 
+Table of contents
+·         Introduction to .Net Core WebAPI
+o   Introduction to Web Service
+o   Introduction to REST API
+o   Introduction to Web API
+o   Difference between Web Service, WCF Service and Web API
+o   HTTPS Verbs
+o   Web API Routing
+o   Configuring WebApi
+o   Testing the Web API Project with Postman and Swagger
+o   Building first ASP.NET Core Web API
+o   Fluent Validation
+·         Working with Relational Data using Entity Framework Core
+o   Relationships in EF Core
+o   HTTP Response Status Codes
+o   Try-Catch-Finally block
+o   Throwing custom exceptions
+o   Global error handling
+o   Custom global error handling
+o   DML Manipulation using Repository Pattern
+·         Controller Action Return Types
+o   Introduction to Controller Action Return Types
+o   Specific Type
+o   IActionResult
+o   ActionResult<Type>
+o   Custom Return Type
+·         Web API Versioning
+·         Web API Logging
+·         Unit Testing in Web API
+·         Security on Web API
+o   Configuring Identity services
+o   Configuring authentication
+o   Preventing Cross Site Scripting
+o   Enabling Cross-Origin Requests (CORS)
+o   JWT Token Authentication
+·         Designing a microservice-oriented application
+o   Application specifications
+o   Benefits of a microservice-based solution
+o   Downsides of a microservice-based solution
+o   
+Microservices Fundamentals
+o   Microservices Fundamentals
+o   Basic
+ 
+ 
+ 
+Toipcs	Sub-Topics
+ 	 
+·         Introduction to .NET Core	 
+ 	o   .NET Core – Overview
+ 	o   Characteristics of .NET Core
+ 	o   The .NET Core Platform
+ 	o   .NET CORE architecture and Advantages
+ 	o   Build and run Cross platform apps
+ 	o   .NET Core – Environment Setup
+ 	o   .NET Core – Code Execution
+ 	o   Middleware
+ 	o   .NET Core – Modularity
+ 	o   .NET Core – Project Files
+ 	o   IIS Publishing & different cross platform deployments
+ 	o   Microservices using .NET Core
+ 	o   .NET Core – Windows Runtime and Extension SDKs.
+ 	o   .NET Core – Create .NET Standard Library .
+ 	o   What is .NET Framework
+ 	o   Comparison between .NET Framework & .NET Core
+ 	 
+ 	 
+·         Fundamental	 
+ 	o   ASP.NET Core - Project.Json
+ 	o   ASP.NET Core – Configuration
+ 	o   MVC Design Pattern
+ 	·         Middleware
+ 	·         Exceptions
+ 	·         Static Files
+ 	·         Setup MVC
+ 	o   Routing
+ 	o   Attribute Routes
+ 	o   Action Results
+ 	o   Model
+ 	o   Views
+ 	·         Identity Configuration
+ 	o   Identity Migrations
+ 	o   User Registration
+ 	o   Create a User
+ 	o   Log In and Log Out
+ 	·         Exploring Controllers
+ 	o   Working with Controllers
+ 	o   Routing
+ 	o   Attribute Routing
+ 	o   Action Methods
+ 	o   Action Filters ,Types of Action Filters
+ 	o   Passing Data from controller to view
+ 	·         Working with Views
+ 	o   ASP.NET MVC Razor View Engines
+ 	o   HTML Helpers
+ 	o   Working with Layout
+ 	·         Exploring Models & working with data
+ 	o   Model Binding
+ 	▪  Automapper
+ 	o   Data Annotation
+ 	·         Setup Entity Framework Core
+ 	o   DB Context
+ 	o   Model Creation & Mapping
+ 	o   Validation
+ 	▪  Fluent Validation
+ 	·         Using AJAX In ASP.NET MVC
+ 	o   Introduction to Ajax
+ 	o   AJAX in ASP.NET MVC
+ 	o   AJAX Helpers
+ 	o   Partial Page rendering
+ 	o   AJAX using jQuery
+ 	·         Using ASP.NET Identity in ASP.NET MVC
+ 	·         Consume WebAPI
+ 	o   JWT Token Authentication
+ 	o   Consume Methods
+ 	·         Code Commit
+ 	·         Deployment of Application
+ 	 
+ 	Table of contents
+·       ASP.NET Core Introduction	 
+ 	o   .NET Core Theory
+o   Introduction to
+ ASP.NET Core	 
+ 	o   Setting ASP.NET Core Development Environment
+ 	·       Setup and Project Overview
+ 	o   Creating an ASP.NET Core Project
+ 	o   Project File and Program File
+ 	o    .Net Core Pipeline and Middleware
+ 	o   Routing in MVC and Endpoints
+ 	o   AppSettings
+ 	·       Dependency Injection
+ 	o   Understanding DI
+ 	o   Dependency Chains & Dependency Methods
+ 	·       Controllers and Routing
+ 	o   Introduction to Controller
+ 	o   Creating Controller
+ 	o   Introduction to Routing
+ 	o   Transfer Data
+ 	o   Conventional Routing
+ 	o   Attribute Based Routing
+ 	o   Areas
+ 	o   Controller Actions
+ 	o   Passing Values to Actions
+ 	o   Action Return Types
+ 	·       Model, Database and CRUD
+ 	o   Introduction to Model
+ 	o   Creating Our First Model
+ 	o   Code First Approach
+ 	o   Setting Up Connectionstring
+ 	o   Setting up DbContext as well as EntityFrameWork
+ 	 
+ 	 
+ 	Table of contents
+·       Introduction to .Net Core Web API	 
+ 	o   Introduction to Web Service
+ 	o   Introduction to REST API
+ 	o   Introduction to Web API
+ 	o   Difference between SOAP Web Service, WCF Service and Web API
+ 	o   HTTPS Verbs
+ 	o   Web API Routing
+ 	o   Configuring Web Api
+ 	o   Testing the Web API Project with Postman and Swagger
+ 	o   Building first ASP.NET Core Web API
+ 	o   Fluent Validation
+ 	o   Working with Relational Data using Entity Framework Core
+ 	o   Relationships in EF Core
+ 	o   HTTP Response Status Codes
+ 	o   Try-Catch-Finally block
+ 	o   Throwing custom exceptions
+ 	o   Global error handling
+ 	o   Custom global error handling
+ 	o   DML Manipulation using Repository Pattern
+ 	o   Dependency Injection in Web api
+ 	 
+·       Controller Action Return Types	 
+ 	o   Introduction to Controller Action Return Types
+ 	o   Specific Type
+ 	o   IActionResult
+ 	o   ActionResult<Type>
+ 	o   Custom Return Type
+ 	·       Web API Versioning
+ 	·       Web API Logging
+ 	·       Unit Testing in Web API
+ 	 
+ 
+ 
+ 
+ 	ADO.NET + LINQ + EF Core
+Topics	Sub topics
+·         ADO.NET Architecture	o   .NET Data Providers
+ 	o   DB Connectivity Architectures in .NET
+ 	o   Elements of .NET Data Providers
+ 	o   Introduction to SQL Server
+ 	o   Namespaces in ADO.NET
+ 	o   Using server explorer window
+ 	o   Connection class
+ 	o   Command class
+ 	o   Direct Command execution against database
+ 	o   Using Parameters in command
+ 	o   Performing CRUD operations
+ 	 
+LINQ	·         Language Integrated Query
+ 	o   Introduction , LINQ Syntax
+ 	o   Introduction to System.LINQ.Queryable
+ 	o   Query Operators
+ 	o   Select, from, Where
+ 	o   ofType
+ 	o   OrderBy
+ 	o   ThenBy
+ 	o   GroupBy, into
+ 	o   Select
+ 	o   SelectMany
+ 	o   Take, TakeWhile
+ 	o   First
+ 	o   FirstOrDefault
+ 	o   Single
+ 	o   SingleOrDefault
+ 	o   Aggregate functions Sum, Min, Max, Average, Count
+ 	o   Distinct
+ 	o   Intersect
+ 	o   Except
+ 	o   Join
+ 	o   LINQ projection
+ 	o   Deferred execution vs immediate execution
+ 	o   Let keyword
+ 	o   LINQ to Object
+ 	o   LINQ to DataTable
+ 	o   Overview of ORM Products
+·       Entity Framework Core	o   Entity Framework introduction
+ 	o   Using Database first Approach
+ 	o   Using Code First approach
+ 	o   Implementing Repository Pattern
+ 	▪  Introduction & Benefits
+ 	▪  Repository Pattern implementation
+ 	▪  Setting up Entities in EFCore
+ 	o   Using LINQ to Entities to perform CRUD operations
+ 	o   SQL Query Logging
+ 	o   Migration & Database Update
+ 	o   Eager Loading Vs Explicit Loading Vs Lazy Loading
+ 	o   Raw SQL And Stored Procedures 
+ 
+ 
